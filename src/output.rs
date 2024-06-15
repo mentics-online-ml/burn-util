@@ -21,7 +21,13 @@ pub fn print_compare_table<B:Backend>(
         expected_row.insert(0, format!("{i}: expected"));
         builder.push_record(expected_row);
 
-        let mut output_row = out.squeeze::<1>(0).to_data().value.iter().map(|item| to_result_str(item.elem::<f32>())).collect::<Vec<_>>();
+        let x = out.squeeze::<1>(0).to_data().value;
+        let mut output_row = x.iter().map(|item| to_result_str(item.elem::<f32>())).collect::<Vec<_>>();
+        output_row.insert(0, loss.to_string());
+        output_row.insert(0, format!("{i}: output"));
+        builder.push_record(output_row);
+
+        let mut output_row = x.iter().map(|item| to_result_str2(item.elem::<f32>())).collect::<Vec<_>>();
         output_row.insert(0, loss.to_string());
         output_row.insert(0, format!("{i}: output"));
         builder.push_record(output_row);
@@ -40,4 +46,7 @@ const STRING_ONE: &str = "1";
 
 fn to_result_str(x: f32) -> String {
     (if x >= 0.5 { STRING_ONE } else { STRING_ZERO }).to_string()
+}
+fn to_result_str2(x: f32) -> String {
+    format!("{:.2}", x)
 }

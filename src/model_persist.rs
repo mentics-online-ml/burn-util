@@ -21,12 +21,12 @@ pub fn load_model_config() -> anyhow::Result<TheModelConfig> {
 
 // pub fn save_model<B:Backend>(model: &TheModel<B>) -> anyhow::Result<()> {
 pub fn save_model<B:Backend, M:Model + Module<B>>(model: &M) -> anyhow::Result<()> {
-    print!("Saving model at {}...", Local::now());
+    println!("Saving model at {}...", Local::now());
     // TODO: save only occasionally? and coordinate with commiting offsets
     let path = artifacts_dir()?.join("model");
     // TODO: why have to clone?
     model.clone().save_file(&path, &CompactRecorder::new()).with_context(|| "Error saving model")?;
-    println!(" saved to: {:?}", &path);
+    println!("   model saved to: {:?}", &path);
     Ok(())
 }
 
