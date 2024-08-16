@@ -3,6 +3,9 @@ name = "shared-burn"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+crate-type = ["lib"]
+
 [dependencies]
 anyhow = "1.0.82"
 chrono = { version = "0.4.38", default-features = false }

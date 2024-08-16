@@ -12,7 +12,7 @@ pub type ModelOutput<B> = Tensor<B,2>;
 pub const STREAM_EVENT_DIM: usize = 0;
 pub const STREAM_FEATURE_DIM: usize = 1;
 
-pub const INPUT_WIDTH: usize = CHRONO_FEATURES_SIZE + SERIES1_SIZE * (TIME_ENCODING_SIZE + SERIES1_FEATURES_SIZE);
+pub const INPUT_WIDTH: usize = CHRONO_FEATURES_SIZE + SERIES1_SIZE * (TIME_EMBEDDING_SIZE + SERIES1_FEATURES_SIZE);
 pub const HIDDEN_MULT: f32 = 1.8;
 pub const OUTPUT_MULT: f32 = 0.7;
 // pub const BLOCK_DEPTH: usize = 2;
